@@ -1,0 +1,17 @@
+.graph-container {
+  height: 550px;
+  width: 100%;
+  border-radius: 16px;
+  background: linear-gradient(to bottom right, #ffffff, #eef1f7);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  margin: 1rem auto;
+  padding: 8px;
+}
+
+.graph-placeholder {
+  text-align: center;
+  color: #777;
+  font-size: 1rem;
+  font-style: italic;
+  margin: 20px;
+}
