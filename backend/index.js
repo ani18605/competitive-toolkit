@@ -1,5 +1,5 @@
 const express = require('express');
-const { execFile } = require('child_process');
+const { exec, execFile } = require('child_process');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -8,9 +8,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/run', (req, res) => {
-  execFile('./build/toolkit.exe', (err, stdout, stderr) => {
-    if (err) return res.status(500).send(`Error: ${stderr}`);
-    res.send(`Output:\n${stdout}`);
+  exec('g++ runner.cpp -o toolkit', (compileErr) => {
+    if (compileErr) return res.status(500).send(`Compile Error: ${compileErr}`);
+
+    execFile('./toolkit', (err, stdout, stderr) => {
+      if (err) return res.status(500).send(`Execution Error: ${stderr}`);
+      res.send(`Output:\n${stdout}`);
+    });
   });
 });
 
